@@ -17,19 +17,20 @@ namespace Agava.WalletTemplate
             _saveLoad = saveLoad;
         }
 
-        public bool HasSave => _saveLoad.HasSave(SaveKey);
         private string SaveKey => $"{typeof(T)}-{_id}";
 
         public IWallet<T> Load()
         {
-            if (HasSave == false)
-                throw new InvalidOperationException("Wallet with this id was not saved");
-            
             if (Hash.ContainsKey(_id))
                 return Hash[_id];
 
-            var jsonString = _saveLoad.Load(SaveKey);
-            var wallet = JsonConvert.DeserializeObject<Wallet<T>>(jsonString);
+            var wallet = new Wallet<T>();
+
+            if (_saveLoad.HasSave(SaveKey))
+            {
+                var jsonString = _saveLoad.Load(SaveKey);
+                wallet = JsonConvert.DeserializeObject<Wallet<T>>(jsonString);
+            }
 
             Hash.Add(_id, wallet);
 
