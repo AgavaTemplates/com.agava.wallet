@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 namespace Agava.WalletTemplate
 {
     [Serializable]
-    public sealed class Wallet<T> : IWallet<T> where T : IComparable
+    public sealed class Wallet<T> : IWallet<T> where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
     {
         [JsonProperty(nameof(Value))] public T Value { get; private set; }
-        
+
         public void Add(T amount)
         {
             if (Compare(amount, Operation.LessThan, 0))

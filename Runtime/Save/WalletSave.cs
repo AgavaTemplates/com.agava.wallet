@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Agava.WalletTemplate
 {
-    public class WalletSave<T> where T : IComparable
+    public class WalletSave<T> where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
     {
         private static readonly Dictionary<string, IWallet<T>> Hash = new();
 
@@ -17,8 +17,6 @@ namespace Agava.WalletTemplate
             _saveLoad = saveLoad;
         }
 
-        private string SaveKey => $"{typeof(T)}-{_id}";
-
         public IWallet<T> Load()
         {
             if (Hash.ContainsKey(_id))
@@ -26,9 +24,9 @@ namespace Agava.WalletTemplate
 
             var wallet = new Wallet<T>();
 
-            if (_saveLoad.HasSave(SaveKey))
+            if (_saveLoad.HasSave(_id))
             {
-                var jsonString = _saveLoad.Load(SaveKey);
+                var jsonString = _saveLoad.Load(_id);
                 wallet = JsonConvert.DeserializeObject<Wallet<T>>(jsonString);
             }
 
@@ -40,7 +38,7 @@ namespace Agava.WalletTemplate
         public void Save(IWallet<T> wallet)
         {
             var jsonString = JsonConvert.SerializeObject(wallet);
-            _saveLoad.Save(SaveKey, jsonString);
+            _saveLoad.Save(_id, jsonString);
         }
     }
 }
