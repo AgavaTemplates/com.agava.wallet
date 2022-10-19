@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Agava.WalletTemplate.MathOperations;
 using Newtonsoft.Json;
 
 namespace Agava.WalletTemplate
@@ -27,25 +28,15 @@ namespace Agava.WalletTemplate
             if (amount.CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(amount) + " less than 0");
 
-            Value = Calculate(Value, Operation.Plus, amount);
+            Value = new Add<T>(Value, amount).Result();
         }
 
         public void Remove(T amount)
         {
-            if (Calculate(Value, Operation.Minus, amount).CompareTo(0) < 0)
+            if (new Subtract<T>(Value, amount).Result().CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(Value) + " less than 0");
 
-            Value = Calculate(Value, Operation.Plus, amount);
-        }
-
-        private T Calculate(T leftValue, Operation operation, T rightValue)
-        {
-            return operation switch
-            {
-                Operation.Plus => (dynamic)leftValue + (dynamic)rightValue,
-                Operation.Minus => (dynamic)leftValue - (dynamic)rightValue,
-                _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
-            };
+            Value = new Subtract<T>(Value, amount).Result();
         }
     }
 }
