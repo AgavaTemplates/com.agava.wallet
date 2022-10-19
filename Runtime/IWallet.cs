@@ -2,7 +2,7 @@
 
 namespace Agava.WalletTemplate
 {
-    public interface IWallet<T> where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
+    public interface IWallet<T> where T : IComparable, IComparable<T>
     {
         T Value { get; }
 

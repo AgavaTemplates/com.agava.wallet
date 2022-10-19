@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Agava.WalletTemplate
 {
     [Serializable]
-    public sealed class Wallet<T> : IWallet<T> where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
+    public sealed class Wallet<T> : IWallet<T> where T : IComparable, IComparable<T>
     {
         private readonly IExpressionLambda<T> _addExpression;
         private readonly IExpressionLambda<T> _subtractExpression;

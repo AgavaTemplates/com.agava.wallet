@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Agava.WalletTemplate
 {
-    public class WalletSave<T> where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
+    public class WalletSave<T> where T : IComparable, IComparable<T>
     {
         private static readonly Dictionary<string, IWallet<T>> Hash = new();
 
