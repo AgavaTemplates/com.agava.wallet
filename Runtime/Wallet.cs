@@ -24,7 +24,7 @@ namespace Agava.WalletTemplate
 
         public void Add(T amount)
         {
-            if (Compare(amount, Operation.LessThan, 0))
+            if (amount.CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(amount) + " less than 0");
 
             Value = Calculate(Value, Operation.Plus, amount);
@@ -32,7 +32,7 @@ namespace Agava.WalletTemplate
 
         public void Remove(T amount)
         {
-            if (Compare(Calculate(Value, Operation.Minus, amount), Operation.LessThan, 0))
+            if (Calculate(Value, Operation.Minus, amount).CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(Value) + " less than 0");
 
             Value = Calculate(Value, Operation.Plus, amount);
@@ -44,15 +44,6 @@ namespace Agava.WalletTemplate
             {
                 Operation.Plus => (dynamic)leftValue + (dynamic)rightValue,
                 Operation.Minus => (dynamic)leftValue - (dynamic)rightValue,
-                _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
-            };
-        }
-        
-        private bool Compare(T leftValue, Operation operation, int rightValue)
-        {
-            return operation switch
-            {
-                Operation.LessThan => (dynamic)leftValue < (dynamic)rightValue,
                 _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
             };
         }
