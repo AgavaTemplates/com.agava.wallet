@@ -9,6 +9,9 @@ namespace Agava.WalletTemplate
     [Serializable]
     public sealed class Wallet<T> : IWallet<T> where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
     {
+        private readonly IExpressionLambda<T> _addExpression;
+        private readonly IExpressionLambda<T> _subtractExpression;
+
         public Wallet()
         {
             var supportedTypes = new List<Type>
@@ -19,6 +22,9 @@ namespace Agava.WalletTemplate
             
             if (supportedTypes.Contains(typeof(T)) == false)
                 throw new NotSupportedException($"Type '{typeof(T).FullName}' isn't supported!");
+
+            _addExpression = new CachedExpressionLambda<T>(new AddExpressionLambda<T>());
+            _subtractExpression = new CachedExpressionLambda<T>(new SubtractExpressionLambda<T>());
         }
         
         [JsonProperty(nameof(Value))] public T Value { get; private set; }
@@ -28,15 +34,15 @@ namespace Agava.WalletTemplate
             if (amount.CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(amount) + " less than 0");
 
-            Value = new Add<T>(Value, amount).Result();
+            Value = _addExpression.Compile()(Value, amount);
         }
 
         public void Remove(T amount)
         {
-            if (new Subtract<T>(Value, amount).Result().CompareTo(0) < 0)
+            if (_subtractExpression.Compile()(Value, amount).CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(Value) + " less than 0");
 
-            Value = new Subtract<T>(Value, amount).Result();
+            Value = _subtractExpression.Compile()(Value, amount);
         }
     }
 }
