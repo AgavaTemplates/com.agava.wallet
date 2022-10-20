@@ -11,10 +11,10 @@ namespace Agava.WalletTemplate
         private readonly string _id;
         private readonly IJsonSaveLoad _saveLoad;
 
-        public WalletSave(string id, IJsonSaveLoad saveLoad)
+        public WalletSave(string id)
         {
             _id = id;
-            _saveLoad = saveLoad;
+            _saveLoad = new PlayerPrefsJsonSaveLoad();
         }
 
         public IWallet<T> Load()

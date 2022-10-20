@@ -2,7 +2,7 @@
 
 namespace Agava.WalletTemplate
 {
-    public class PlayerPrefsJsonSaveLoad : IJsonSaveLoad
+    internal class PlayerPrefsJsonSaveLoad : IJsonSaveLoad
     {
         public bool HasSave(string id) => PlayerPrefs.HasKey(id);
         public string Load(string id) => PlayerPrefs.GetString(id);
