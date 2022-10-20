@@ -9,6 +9,8 @@
         {
             _wallet = wallet;
             _view = view;
+            
+            _view.Render(Value);
         }
 
         public T Value => _wallet.Value;
