@@ -5,11 +5,11 @@ namespace Agava.WalletTemplate
 {
     public class Test : MonoBehaviour
     {
-        private IWallet<int> _wallet;
-        
+        private IWallet<BigInteger> _wallet;
+
         private void Start()
         {
-            _wallet = new SavedWallet<int>(new WalletSave<int>("123"));
+            _wallet = new SavedWallet<BigIntegerWallet, BigInteger>(new WalletSave<BigIntegerWallet, BigInteger>("123"));
         }
 
         [ContextMenu("Add")]
@@ -22,7 +22,7 @@ namespace Agava.WalletTemplate
         [ContextMenu("Subtract")]
         private void Subtract()
         {
-            _wallet.Remove(1);
+            _wallet.Subtract(1);
             Debug.Log(_wallet.Value);
         }
     }

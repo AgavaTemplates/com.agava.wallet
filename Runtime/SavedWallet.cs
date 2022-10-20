@@ -1,29 +1,27 @@
-﻿using System;
-
-namespace Agava.WalletTemplate
+﻿namespace Agava.WalletTemplate
 {
-    public sealed class SavedWallet<T> : IWallet<T> where T : IComparable, IComparable<T>
+    public sealed class SavedWallet<TWallet, TWalletType> : IWallet<TWalletType> where TWallet : IWallet<TWalletType>, new()
     {
-        private readonly IWallet<T> _wallet;
-        private readonly WalletSave<T> _save;
+        private readonly TWallet _wallet;
+        private readonly WalletSave<TWallet, TWalletType> _save;
 
-        public SavedWallet(WalletSave<T> save)
+        public SavedWallet(WalletSave<TWallet, TWalletType> save)
         {
             _save = save;
             _wallet = save.Load();
         }
 
-        public T Value => _wallet.Value;
+        public TWalletType Value => _wallet.Value;
         
-        public void Add(T amount)
+        public void Add(TWalletType amount)
         {
             _wallet.Add(amount);
             _save.Save(_wallet);
         }
 
-        public void Remove(T amount)
+        public void Subtract(TWalletType amount)
         {
-            _wallet.Remove(amount);
+            _wallet.Subtract(amount);
             _save.Save(_wallet);
         }
     }

@@ -37,7 +37,7 @@ namespace Agava.WalletTemplate
             Value = _addExpression.Compile()(Value, amount);
         }
 
-        public void Remove(T amount)
+        public void Subtract(T amount)
         {
             if (_subtractExpression.Compile()(Value, amount).CompareTo(0) < 0)
                 throw new InvalidOperationException(nameof(Value) + " less than 0");

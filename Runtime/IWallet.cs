@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Agava.WalletTemplate
+﻿namespace Agava.WalletTemplate
 {
-    public interface IWallet<T> where T : IComparable, IComparable<T>
+    public interface IWallet<T>
     {
         T Value { get; }
 
         void Add(T amount);
-        void Remove(T amount);
+        void Subtract(T amount);
     }
 }
