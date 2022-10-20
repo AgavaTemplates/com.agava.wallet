@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Agava.WalletTemplate
 {
+    [Serializable]
     public sealed class IntWallet : IWallet<int>
     {
         [JsonProperty(nameof(Value))] public int Value { get; private set; }

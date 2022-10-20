@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Agava.WalletTemplate
 {
+    [Serializable]
     public sealed class BigIntegerWallet : IWallet<BigInteger>
     {
         [JsonProperty(nameof(Value))] public BigInteger Value { get; private set; }
