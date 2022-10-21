@@ -6,7 +6,7 @@ namespace Agava.WalletTemplate
     [Serializable]
     public sealed class IntWallet : IWallet<int>
     {
-        [JsonProperty(nameof(Value))] public int Value { get; private set; }
+        [JsonProperty] public int Value { get; private set; }
         
         public void Add(int amount)
         {

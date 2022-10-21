@@ -1,16 +1,16 @@
 ﻿namespace Agava.WalletTemplate
 {
-    public sealed class ViewedWallet<T> : IWallet<T>
+    internal sealed class ViewedWallet<T> : IWallet<T>
     {
         private readonly IWallet<T> _wallet;
-        private readonly IWalletView<T> _view;
+        private readonly IWalletView<T>[] _views;
 
-        public ViewedWallet(IWallet<T> wallet, IWalletView<T> view)
+        internal ViewedWallet(IWallet<T> wallet, params IWalletView<T>[] views)
         {
             _wallet = wallet;
-            _view = view;
+            _views = views;
             
-            _view.Render(Value);
+            UpdateViews();
         }
 
         public T Value => _wallet.Value;
@@ -18,13 +18,19 @@
         public void Add(T amount)
         {
             _wallet.Add(amount);
-            _view.Render(Value);
+            UpdateViews();
         }
 
         public void Subtract(T amount)
         {
             _wallet.Subtract(amount);
-            _view.Render(Value);
+            UpdateViews();
+        }
+
+        private void UpdateViews()
+        {
+            foreach (var view in _views)
+                view.Render(Value);
         }
     }
 }

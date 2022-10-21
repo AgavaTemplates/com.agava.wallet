@@ -1,11 +1,11 @@
 ﻿namespace Agava.WalletTemplate
 {
-    public sealed class SavedWallet<TWallet, TWalletType> : IWallet<TWalletType> where TWallet : IWallet<TWalletType>, new()
+    internal sealed class SavedWallet<TWallet, TWalletType> : IWallet<TWalletType> where TWallet : IWallet<TWalletType>, new()
     {
         private readonly TWallet _wallet;
         private readonly WalletSave<TWallet, TWalletType> _save;
 
-        public SavedWallet(WalletSave<TWallet, TWalletType> save)
+        internal SavedWallet(WalletSave<TWallet, TWalletType> save)
         {
             _save = save;
             _wallet = save.Load();

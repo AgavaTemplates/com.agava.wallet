@@ -1,6 +1,6 @@
 ﻿namespace Agava.WalletTemplate
 {
-    internal interface IJsonSaveLoad
+    public interface IJsonSaveLoad
     {
         bool HasSave(string id);
         
