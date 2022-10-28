@@ -1,6 +1,6 @@
 {
-    "name": "Agava.Wallet.Tests",
-    "rootNamespace": "Agava.Wallet.Tests",
+    "name": "Agava.Wallet.RuntimeTests",
+    "rootNamespace": "Agava.Wallet.RuntimeTests",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
