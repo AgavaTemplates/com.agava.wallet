@@ -1,21 +1,21 @@
 using UnityEngine;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public class Test : MonoBehaviour
     {
-        [SerializeField] private BigIntegerWalletPresenter _bigIntegerWallet;
+        [SerializeField] private IntWalletPresenter _bigIntegerWallet;
 
         [ContextMenu("Add")]
         private void Add()
         {
-            _bigIntegerWallet.Model.Add(9999999);
+            _bigIntegerWallet.Model.Add(999999999);
         }
 
         [ContextMenu("Subtract")]
         private void Subtract()
         {
-            _bigIntegerWallet.Model.Subtract(1);
+            _bigIntegerWallet.Model.TrySpend(1);
         }
     }
 }

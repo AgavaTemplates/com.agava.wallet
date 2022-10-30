@@ -2,7 +2,7 @@
 using System.Numerics;
 using Newtonsoft.Json;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     [Serializable]
     public sealed class BigIntegerWallet : IWallet<BigInteger>
@@ -12,17 +12,21 @@ namespace Agava.WalletTemplate
         public void Add(BigInteger amount)
         {
             if (amount < 0)
-                throw new InvalidOperationException(nameof(amount) + " less than 0");
+                throw new ArgumentOutOfRangeException(nameof(amount) + " less than 0");
 
             Value += amount;
         }
 
-        public void Subtract(BigInteger amount)
+        public bool TrySpend(BigInteger amount)
         {
+            if (amount < 0)
+                return false;
+
             if (Value - amount < 0)
-                throw new InvalidOperationException(nameof(Value) + " less than 0");
+                return false;
 
             Value -= amount;
+            return true;
         }
     }
 }

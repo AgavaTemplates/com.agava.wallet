@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public class WalletSave<TWallet, TWalletType> where TWallet : IWallet<TWalletType>, new()
     {

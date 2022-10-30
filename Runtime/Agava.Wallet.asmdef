@@ -1,6 +1,6 @@
 {
     "name": "Agava.Wallet",
-    "rootNamespace": "Agava.WalletTemplate",
+    "rootNamespace": "Agava.Wallet",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

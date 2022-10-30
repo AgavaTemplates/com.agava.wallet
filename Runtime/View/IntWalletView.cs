@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public class IntWalletView : MonoBehaviour, IWalletView<int>
     {

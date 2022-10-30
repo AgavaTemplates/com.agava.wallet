@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public sealed class BigIntegerWalletPresenter : WalletPresenter<BigIntegerWallet, BigInteger>
     {

@@ -1,4 +1,4 @@
-﻿namespace Agava.WalletTemplate
+﻿namespace Agava.Wallet
 {
     internal sealed class ViewedWallet<T> : IWallet<T>
     {
@@ -21,10 +21,13 @@
             UpdateViews();
         }
 
-        public void Subtract(T amount)
+        public bool TrySpend(T amount)
         {
-            _wallet.Subtract(amount);
+            if (_wallet.TrySpend(amount) == false)
+                return false;
+            
             UpdateViews();
+            return true;
         }
 
         private void UpdateViews()
