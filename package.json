@@ -1,7 +1,7 @@
 {
-    "name": "com.agava.wallet",
-    "version": "1.0.0",
-    "displayName": "Wallet",
-    "unity": "2021.3",
-    "description": "Wallet template."
-  }
+  "name": "com.agava.wallet",
+  "version": "1.0.1",
+  "displayName": "Wallet",
+  "unity": "2021.3",
+  "description": "Wallet template."
+}
