@@ -5,7 +5,7 @@ namespace Agava.Wallet
 {
     public abstract class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
     {
-        [SerializeField] private List<MonoBehaviour> _walletViews;
+        [SerializeField] private List<MonoBehaviour> _walletViews = new();
         [SerializeField] private string _id;
 
         public IWallet<TWalletType> Model { get; private set; }
@@ -15,7 +15,7 @@ namespace Agava.Wallet
         {
             foreach (var view in _walletViews)
             {
-                if (view && view is IWalletView<TWalletType> == false)
+                if (view != null && view is IWalletView<TWalletType> == false)
                 {
                     Debug.LogError(nameof(view) + " needs to implement " + typeof(IWalletView<TWalletType>));
                     _walletViews.Remove(view);
