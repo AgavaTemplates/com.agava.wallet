@@ -1,12 +1,12 @@
 ﻿using System.Numerics;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Agava.Wallet
 {
     public class BigIntegerWalletView : MonoBehaviour, IWalletView<BigInteger>
     {
-        [SerializeField] private Text _text;
+        [SerializeField] private TMP_Text _text;
 
         public void Render(BigInteger currentValue)
         {
