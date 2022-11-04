@@ -1,4 +1,4 @@
-﻿namespace Agava.WalletTemplate
+﻿namespace Agava.Wallet
 {
     internal sealed class SavedWallet<TWallet, TWalletType> : IWallet<TWalletType> where TWallet : IWallet<TWalletType>, new()
     {
@@ -19,9 +19,11 @@
             _save.Save(_wallet);
         }
 
-        public void Subtract(TWalletType amount)
+        public bool CanSpend(TWalletType amount) => _wallet.CanSpend(amount);
+
+        public void Spend(TWalletType amount)
         {
-            _wallet.Subtract(amount);
+            _wallet.Spend(amount);
             _save.Save(_wallet);
         }
     }

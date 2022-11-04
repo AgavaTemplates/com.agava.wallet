@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public class Test : MonoBehaviour
     {
@@ -9,13 +9,13 @@ namespace Agava.WalletTemplate
         [ContextMenu("Add")]
         private void Add()
         {
-            _bigIntegerWallet.Model.Add(9999999);
+            _bigIntegerWallet.Model.Add(999999999);
         }
 
-        [ContextMenu("Subtract")]
-        private void Subtract()
+        [ContextMenu("Spend")]
+        private void Spend()
         {
-            _bigIntegerWallet.Model.Subtract(1);
+            _bigIntegerWallet.Model.Spend(1);
         }
     }
 }

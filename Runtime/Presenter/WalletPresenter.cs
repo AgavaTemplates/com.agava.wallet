@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public abstract class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
     {
-        [SerializeField] private string _id;
         [SerializeField] private List<MonoBehaviour> _walletViews;
+        [SerializeField] private string _id;
 
         public IWallet<TWalletType> Model { get; private set; }
+        protected abstract TWalletType StartValue { get; }
 
         private void OnValidate()
         {
@@ -26,10 +27,11 @@ namespace Agava.WalletTemplate
 
         private void Awake()
         {
-            Model = new ViewedWallet<TWalletType>(
-                        new SavedWallet<TWallet, TWalletType>(
-                            new WalletSave<TWallet, TWalletType>(_id)
-                ), CastWalletView());
+            var walletSave = new WalletSave<TWallet, TWalletType>(_id);
+            Model = new ViewedWallet<TWalletType>(new SavedWallet<TWallet, TWalletType>(walletSave), CastWalletView());
+            
+            if (walletSave.HasSave == false)
+                Model.Add(StartValue);
         }
 
         private IWalletView<TWalletType>[] CastWalletView()

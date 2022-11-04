@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Agava.WalletTemplate
+namespace Agava.Wallet
 {
     public class IntWalletView : MonoBehaviour, IWalletView<int>
     {
-        [SerializeField] private Text _text;
+        [SerializeField] private TMP_Text _text;
 
         public void Render(int currentValue)
         {
