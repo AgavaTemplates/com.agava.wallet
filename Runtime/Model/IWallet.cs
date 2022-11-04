@@ -5,6 +5,8 @@
         T Value { get; }
 
         void Add(T amount);
-        bool TrySpend(T amount);
+
+        bool CanSpend(T amount);
+        void Spend(T amount);
     }
 }

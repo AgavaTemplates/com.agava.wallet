@@ -19,13 +19,12 @@
             _save.Save(_wallet);
         }
 
-        public bool TrySpend(TWalletType amount)
+        public bool CanSpend(TWalletType amount) => _wallet.CanSpend(amount);
+
+        public void Spend(TWalletType amount)
         {
-            if (_wallet.TrySpend(amount) == false)
-                return false;
-            
+            _wallet.Spend(amount);
             _save.Save(_wallet);
-            return true;
         }
     }
 }

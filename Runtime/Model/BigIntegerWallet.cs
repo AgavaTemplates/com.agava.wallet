@@ -16,17 +16,15 @@ namespace Agava.Wallet
 
             Value += amount;
         }
+        
+        public bool CanSpend(BigInteger amount) => amount >= 0 && Value - amount >= 0;
 
-        public bool TrySpend(BigInteger amount)
+        public void Spend(BigInteger amount)
         {
-            if (amount < 0)
-                return false;
-
-            if (Value - amount < 0)
-                return false;
+            if (CanSpend(amount) == false)
+                throw new InvalidOperationException("Can't spend");
 
             Value -= amount;
-            return true;
         }
     }
 }

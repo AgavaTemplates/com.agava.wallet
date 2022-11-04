@@ -4,7 +4,7 @@ namespace Agava.Wallet
 {
     public class Test : MonoBehaviour
     {
-        [SerializeField] private IntWalletPresenter _bigIntegerWallet;
+        [SerializeField] private BigIntegerWalletPresenter _bigIntegerWallet;
 
         [ContextMenu("Add")]
         private void Add()
@@ -12,10 +12,10 @@ namespace Agava.Wallet
             _bigIntegerWallet.Model.Add(999999999);
         }
 
-        [ContextMenu("Subtract")]
-        private void Subtract()
+        [ContextMenu("Spend")]
+        private void Spend()
         {
-            _bigIntegerWallet.Model.TrySpend(1);
+            _bigIntegerWallet.Model.Spend(1);
         }
     }
 }

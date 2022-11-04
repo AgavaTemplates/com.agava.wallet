@@ -19,16 +19,14 @@ namespace Agava.Wallet
             Value += amount;
         }
 
-        public bool TrySpend(int amount)
-        {
-            if (amount < 0)
-                return false;
+        public bool CanSpend(int amount) => amount >= 0 && Value - amount >= 0;
 
-            if (Value - amount < 0)
-                return false;
+        public void Spend(int amount)
+        {
+            if (CanSpend(amount) == false)
+                throw new InvalidOperationException("Can't spend");
 
             Value -= amount;
-            return true;
         }
     }
 }

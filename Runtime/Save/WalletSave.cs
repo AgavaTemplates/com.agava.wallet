@@ -18,6 +18,8 @@ namespace Agava.Wallet
             _saveLoad = saveLoad;
         }
 
+        public bool HasSave => _saveLoad.HasSave(_id);
+
         public TWallet Load()
         {
             if (Hash.ContainsKey(_id))

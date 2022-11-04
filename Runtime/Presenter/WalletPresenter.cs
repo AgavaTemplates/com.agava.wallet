@@ -27,9 +27,9 @@ namespace Agava.Wallet
         private void Awake()
         {
             Model = new ViewedWallet<TWalletType>(
-                        new SavedWallet<TWallet, TWalletType>(
-                            new WalletSave<TWallet, TWalletType>(_id)
-                ), CastWalletView());
+                new SavedWallet<TWallet, TWalletType>(
+                    new WalletSave<TWallet, TWalletType>(_id)), 
+                CastWalletView());
         }
 
         private IWalletView<TWalletType>[] CastWalletView()
