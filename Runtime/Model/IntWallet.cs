@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Model
 {
     [Serializable]
     public sealed class IntWallet : IWallet<int>

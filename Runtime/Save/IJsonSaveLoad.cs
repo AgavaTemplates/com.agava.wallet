@@ -1,4 +1,4 @@
-﻿namespace Agava.Wallet
+﻿namespace Agava.Wallet.Save
 {
     public interface IJsonSaveLoad
     {

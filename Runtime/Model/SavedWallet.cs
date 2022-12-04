@@ -1,4 +1,6 @@
-﻿namespace Agava.Wallet
+﻿using Agava.Wallet.Save;
+
+namespace Agava.Wallet.Model
 {
     internal sealed class SavedWallet<TWallet, TWalletType> : IWallet<TWalletType> where TWallet : IWallet<TWalletType>, new()
     {

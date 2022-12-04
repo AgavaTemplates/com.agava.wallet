@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.View
 {
     public class BigIntegerWalletView : MonoBehaviour, IWalletView<BigInteger>
     {

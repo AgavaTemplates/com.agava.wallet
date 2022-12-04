@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using Agava.Wallet.Model;
+using Agava.Wallet.Save;
+using Agava.Wallet.View;
 using UnityEngine;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Presenter
 {
     public abstract class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
     {

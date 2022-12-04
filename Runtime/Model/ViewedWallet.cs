@@ -1,4 +1,6 @@
-﻿namespace Agava.Wallet
+﻿using Agava.Wallet.View;
+
+namespace Agava.Wallet.Model
 {
     internal sealed class ViewedWallet<TWalletType> : IWallet<TWalletType>
     {

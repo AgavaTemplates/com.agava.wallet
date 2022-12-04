@@ -2,7 +2,7 @@
 using System.Numerics;
 using Newtonsoft.Json;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Model
 {
     [Serializable]
     public sealed class BigIntegerWallet : IWallet<BigInteger>

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Save
 {
     public class PlayerPrefsJsonSaveLoad : IJsonSaveLoad
     {

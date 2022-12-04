@@ -1,4 +1,4 @@
-﻿namespace Agava.Wallet
+﻿namespace Agava.Wallet.View
 {
     public interface IWalletView<in T>
     {
