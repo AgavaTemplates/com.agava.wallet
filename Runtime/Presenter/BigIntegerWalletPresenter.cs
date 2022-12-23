@@ -1,6 +1,6 @@
-﻿using Agava.Wallet.Utils;
+﻿using Agava.Wallet.Model;
 using System.Numerics;
-using Agava.Wallet.Model;
+using Agava.Wallet.Attributes;
 using UnityEngine;
 
 namespace Agava.Wallet.Presenter
