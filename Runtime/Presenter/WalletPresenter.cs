@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Agava.Wallet.Attributes;
 using Agava.Wallet.Model;
 using Agava.Wallet.Save;
 using Agava.Wallet.View;
@@ -8,8 +9,8 @@ namespace Agava.Wallet.Presenter
 {
     public abstract class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
     {
+        [SerializeField, ReadOnly] private string _id;
         [SerializeField] private List<MonoBehaviour> _walletViews = new();
-        [SerializeField] private string _id;
 
         public IWallet<TWalletType> Model { get; private set; }
         protected abstract TWalletType StartValue { get; }
