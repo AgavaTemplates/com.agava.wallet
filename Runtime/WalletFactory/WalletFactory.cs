@@ -10,6 +10,9 @@ namespace Agava.Wallet.WalletFactoryAPI
     public class WalletFactory
     {
         private readonly WalletList _walletList = new();
+        
+        public string PathToWalletPrefabWith(string walletId) 
+            => _walletList.PathToWalletWith(walletId);
 
         public bool CanCreateWalletPrefabWith(string walletId) 
             => walletId.Trim() != "" && _walletList.HasWalletWith(walletId) == false;
@@ -44,8 +47,5 @@ namespace Agava.Wallet.WalletFactoryAPI
 
             return walletInstance;
         }
-        
-        public string PathToWalletPrefabWith(string walletId) 
-            => _walletList.PathToWalletWith(walletId);
     }
 }
