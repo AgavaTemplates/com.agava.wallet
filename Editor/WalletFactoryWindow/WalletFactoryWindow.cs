@@ -1,5 +1,4 @@
-using System.IO;
-using Agava.Wallet.Presenter;
+using Agava.Wallet.WalletFactoryAPI;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,10 +6,11 @@ namespace Agava.Wallet.Editor
 {
     internal class WalletFactoryWindow : EditorWindow
     {
+        private readonly WalletFactory _walletFactory = new();
         private readonly WalletFactoryWindowStyles _windowStyles = new();
-        private string _walletId;
         private WalletType _walletType;
-        
+        private string _walletId;
+
         [MenuItem("Window/Wallet Factory")]
         private static void Initialize()
         {
@@ -39,39 +39,9 @@ namespace Agava.Wallet.Editor
             EditorGUILayout.Space(6);
             
             if (GUILayout.Button("Create wallet prefab", _windowStyles.DefaultButtonStyle()))
-            {
-                string pathToFolder = EditorUtility.OpenFolderPanel("Open the folder where to save the wallet prefab", Application.dataPath, "Assets");
-
-                if (pathToFolder.Trim() != "")
-                {
-                    var walletInstance = CreateWalletPrefab();
-
-                    string path = AssetDatabase.GenerateUniqueAssetPath($"{pathToFolder}{Path.DirectorySeparatorChar}{walletInstance.name}.prefab");
-                    PrefabUtility.SaveAsPrefabAsset(walletInstance, path);
-                    
-                    DestroyImmediate(walletInstance);
-                }
-            }
+                _walletFactory.CreateWalletPrefab(_walletType, _walletId);
 
             EditorGUILayout.EndVertical();
-        }
-
-        private GameObject CreateWalletPrefab()
-        {
-            var walletInstance = new GameObject();
-
-            if (_walletType == WalletType.Int)
-            {
-                walletInstance.name = "IntWallet";
-                walletInstance.AddComponent<IntWalletPresenter>();
-            }
-            else
-            {
-                walletInstance.name = "BigIntegerWallet";
-                walletInstance.AddComponent<BigIntegerWalletPresenter>();
-            }
-
-            return walletInstance;
         }
     }
 }

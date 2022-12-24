@@ -3,6 +3,7 @@ using Agava.Wallet.Attributes;
 using Agava.Wallet.Model;
 using Agava.Wallet.Save;
 using Agava.Wallet.View;
+using UnityEditor;
 using UnityEngine;
 
 namespace Agava.Wallet.Presenter
@@ -14,6 +15,14 @@ namespace Agava.Wallet.Presenter
 
         public IWallet<TWalletType> Model { get; private set; }
         protected abstract TWalletType StartValue { get; }
+
+#if UNITY_EDITOR
+        internal void Initialize(string id)
+        {
+            _id = id;
+            EditorUtility.SetDirty(gameObject);
+        }
+#endif
 
         private void OnValidate()
         {
