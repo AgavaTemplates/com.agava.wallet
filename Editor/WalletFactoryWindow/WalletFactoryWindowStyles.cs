@@ -2,7 +2,7 @@
 
 namespace Agava.Wallet.Editor
 {
-    internal class WalletFactoryWindowStyles
+    internal sealed class WalletFactoryWindowStyles
     {
         private GUIStyle _titleTextStyle;
         private GUIStyle _labelTextStyle;

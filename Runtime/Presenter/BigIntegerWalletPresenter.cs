@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Agava.Wallet.Presenter
 {
+    [AddComponentMenu("")]
     public sealed class BigIntegerWalletPresenter : WalletPresenter<BigIntegerWallet, BigInteger>
     {
         [SerializeField, BigIntegerString] private string _startValue = "0";

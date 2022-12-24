@@ -19,7 +19,8 @@ namespace Agava.Wallet.Model
             Value += amount;
         }
 
-        public bool CanSpend(int amount) => amount >= 0 && Value - amount >= 0;
+        public bool CanSpend(int amount) 
+            => amount >= 0 && Value - amount >= 0;
 
         public void Spend(int amount)
         {

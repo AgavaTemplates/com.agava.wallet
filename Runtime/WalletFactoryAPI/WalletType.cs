@@ -1,4 +1,5 @@
-﻿namespace Agava.Wallet.WalletFactoryAPI
+﻿#if UNITY_EDITOR
+namespace Agava.Wallet.WalletFactoryAPI
 {
     public enum WalletType
     {
@@ -6,3 +7,4 @@
         BigInteger
     }
 }
+#endif

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Agava.Wallet.Editor
 {
-    internal class WalletFactoryWindow : EditorWindow
+    internal sealed class WalletFactoryWindow : EditorWindow
     {
         private readonly WalletFactory _walletFactory = new();
         private readonly WalletFactoryWindowStyles _windowStyles = new();

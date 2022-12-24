@@ -4,28 +4,16 @@ using Agava.Wallet.Model;
 using Agava.Wallet.Save;
 using Agava.Wallet.View;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace Agava.Wallet.Presenter
 {
-    public abstract class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
+    public abstract partial class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
     {
         [SerializeField, ReadOnly] private string _id;
         [SerializeField] private List<MonoBehaviour> _walletViews = new();
 
         public IWallet<TWalletType> Model { get; private set; }
-        internal string Id => _id;
         protected abstract TWalletType StartValue { get; }
-
-#if UNITY_EDITOR
-        internal void Initialize(string id)
-        {
-            _id = id;
-            EditorUtility.SetDirty(gameObject);
-        }
-#endif
 
         private void OnValidate()
         {
@@ -43,10 +31,10 @@ namespace Agava.Wallet.Presenter
 
         private void Awake()
         {
-            var walletSave = new WalletSave<TWallet, TWalletType>(_id);
-            Model = new ViewedWallet<TWalletType>(new SavedWallet<TWallet, TWalletType>(walletSave), CastWalletView());
+            var walletInventory = new WalletInventory<TWallet, TWalletType>(_id);
+            Model = new ViewedWallet<TWalletType>(new SavedWallet<TWallet, TWalletType>(walletInventory), CastWalletView());
             
-            if (walletSave.HasSave == false)
+            if (walletInventory.HasSave == false)
                 Model.Add(StartValue);
         }
 

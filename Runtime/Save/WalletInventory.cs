@@ -3,22 +3,22 @@ using Newtonsoft.Json;
 
 namespace Agava.Wallet.Save
 {
-    public class WalletSave<TWallet, TWalletType> where TWallet : IWallet<TWalletType>, new()
+    internal sealed class WalletInventory<TWallet, TWalletType> where TWallet : IWallet<TWalletType>, new()
     {
         private readonly string _id;
         private readonly IJsonSaveLoad _saveLoad;
 
-        public WalletSave(string id) : this (id, new PlayerPrefsJsonSaveLoad()) { }
+        internal WalletInventory(string id) : this (id, new PlayerPrefsJsonSaveLoad()) { }
 
-        public WalletSave(string id, IJsonSaveLoad saveLoad)
+        internal WalletInventory(string id, IJsonSaveLoad saveLoad)
         {
             _id = id;
             _saveLoad = saveLoad;
         }
 
-        public bool HasSave => _saveLoad.HasSave(_id);
+        internal bool HasSave => _saveLoad.HasSave(_id);
 
-        public TWallet Load()
+        internal TWallet Load()
         {
             var wallet = new TWallet();
 
@@ -31,7 +31,7 @@ namespace Agava.Wallet.Save
             return wallet;
         }
 
-        public void Save(TWallet wallet)
+        internal void Save(TWallet wallet)
         {
             var jsonString = JsonConvert.SerializeObject(wallet);
             _saveLoad.Save(_id, jsonString);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using System.Linq;
 using Agava.Wallet.Presenter;
 using UnityEditor;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Agava.Wallet.WalletFactoryAPI
 {
-    internal class WalletList
+    internal sealed class WalletList
     {
         private readonly List<IntWalletPresenter> _intWallets = new();
         private readonly List<BigIntegerWalletPresenter> _bigIntegerWallets = new();
@@ -44,3 +45,4 @@ namespace Agava.Wallet.WalletFactoryAPI
         }
     }
 }
+#endif

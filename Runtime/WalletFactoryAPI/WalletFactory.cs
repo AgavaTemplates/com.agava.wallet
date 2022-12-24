@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.IO;
 using Agava.Wallet.Presenter;
@@ -7,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace Agava.Wallet.WalletFactoryAPI
 {
-    public class WalletFactory
+    public sealed class WalletFactory
     {
         private readonly WalletList _walletList = new();
         
@@ -49,3 +50,4 @@ namespace Agava.Wallet.WalletFactoryAPI
         }
     }
 }
+#endif

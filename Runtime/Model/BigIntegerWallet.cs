@@ -17,7 +17,8 @@ namespace Agava.Wallet.Model
             Value += amount;
         }
         
-        public bool CanSpend(BigInteger amount) => amount >= 0 && Value - amount >= 0;
+        public bool CanSpend(BigInteger amount) 
+            => amount >= 0 && Value - amount >= 0;
 
         public void Spend(BigInteger amount)
         {

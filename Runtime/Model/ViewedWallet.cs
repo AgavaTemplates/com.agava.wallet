@@ -23,7 +23,8 @@ namespace Agava.Wallet.Model
             UpdateViews();
         }
 
-        public bool CanSpend(TWalletType amount) => _wallet.CanSpend(amount);
+        public bool CanSpend(TWalletType amount) 
+            => _wallet.CanSpend(amount);
 
         public void Spend(TWalletType amount)
         {
