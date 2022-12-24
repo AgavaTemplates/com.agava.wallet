@@ -8,8 +8,8 @@ namespace Agava.Wallet.Editor
     {
         private readonly WalletFactory _walletFactory = new();
         private readonly WalletFactoryWindowStyles _windowStyles = new();
+        private string _walletId = "";
         private WalletType _walletType;
-        private string _walletId;
 
         [MenuItem("Window/Wallet Factory")]
         private static void Initialize()
@@ -31,15 +31,29 @@ namespace Agava.Wallet.Editor
             _walletId = EditorGUILayout.TextField("", _walletId);
             EditorGUILayout.EndHorizontal();
             
+            if (_walletId.Trim() != "" && _walletFactory.CanCreateWalletPrefabWith(_walletId) == false)
+            {
+                EditorGUILayout.HelpBox($"This id ('{_walletId}') already taken\nPath: {_walletFactory.PathToWalletPrefabWith(_walletId)}", MessageType.Warning);
+                EditorGUILayout.Separator();
+            }
+            
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Wallet type", _windowStyles.LabelTextStyle());
             _walletType = (WalletType)EditorGUILayout.EnumPopup(_walletType);
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space(6);
-            
+
             if (GUILayout.Button("Create wallet prefab", _windowStyles.DefaultButtonStyle()))
-                _walletFactory.CreateWalletPrefab(_walletType, _walletId);
+            {
+                if (_walletFactory.CanCreateWalletPrefabWith(_walletId))
+                {
+                    _walletFactory.CreateWalletPrefab(_walletType, _walletId);
+                    _walletId = "";
+
+                    GUIUtility.keyboardControl = 0;
+                }
+            }
 
             EditorGUILayout.EndVertical();
         }

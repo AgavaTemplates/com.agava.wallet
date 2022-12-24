@@ -3,8 +3,10 @@ using Agava.Wallet.Attributes;
 using Agava.Wallet.Model;
 using Agava.Wallet.Save;
 using Agava.Wallet.View;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Agava.Wallet.Presenter
 {
@@ -14,6 +16,7 @@ namespace Agava.Wallet.Presenter
         [SerializeField] private List<MonoBehaviour> _walletViews = new();
 
         public IWallet<TWalletType> Model { get; private set; }
+        internal string Id => _id;
         protected abstract TWalletType StartValue { get; }
 
 #if UNITY_EDITOR

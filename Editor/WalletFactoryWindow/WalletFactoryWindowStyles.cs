@@ -37,7 +37,7 @@ namespace Agava.Wallet.Editor
                 return _defaultButtonStyle;
 
             _defaultButtonStyle = GUI.skin.button;
-            _defaultButtonStyle.margin = new RectOffset(6, 0, 0, 0);
+            _defaultButtonStyle.margin = new RectOffset(3, 0, 0, 0);
             _defaultButtonStyle.fixedWidth = 150;
 
             return _defaultButtonStyle;
