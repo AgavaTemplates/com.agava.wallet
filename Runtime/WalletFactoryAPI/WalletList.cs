@@ -25,14 +25,25 @@ namespace Agava.Wallet.WalletFactoryAPI
         internal string PathToWalletWith(string walletId)
         {
             if (HasWalletWith(walletId) == false)
-                return "";
+                return "No wallet with this id";
 
             Load();
 
-            var intWallet = _intWallets.FirstOrDefault(wallet => wallet.Id == walletId);
-            var bigIntegerWallet = _bigIntegerWallets.FirstOrDefault(wallet => wallet.Id == walletId);
+            var wallets = new List<GameObject>();
+            _intWallets.Where(wallet => wallet.Id == walletId).ToList().ForEach(wallet => wallets.Add(wallet.gameObject));
+            _bigIntegerWallets.Where(wallet => wallet.Id == walletId).ToList().ForEach(wallet => wallets.Add(wallet.gameObject));
 
-            return AssetDatabase.GetAssetPath(intWallet != null ? intWallet : bigIntegerWallet);
+            string path = "";
+
+            foreach (var wallet in wallets)
+            {
+                if (AssetDatabase.Contains(wallet) == false)
+                    continue;
+
+                return AssetDatabase.GetAssetPath(wallet);
+            }
+
+            return path;
         }
 
         private void Load()

@@ -20,30 +20,51 @@ namespace Agava.Wallet.Editor
 
         private void OnGUI()
         {
-            EditorGUILayout.Space(6);
-            EditorGUILayout.LabelField("Wallet factory", _windowStyles.TitleTextStyle());
-            EditorGUILayout.Separator();
+            Title();
 
             EditorGUILayout.BeginVertical();
 
+            WalletIdField();
+            WalletTypeField();
+            EditorGUILayout.Space(6);
+            CreateWalletPrefabButton();
+
+            EditorGUILayout.EndVertical();
+        }
+        
+        private void Title()
+        {
+            EditorGUILayout.Space(6);
+            EditorGUILayout.LabelField("Wallet factory", _windowStyles.TitleTextStyle());
+            EditorGUILayout.Separator();
+        }
+
+        private void WalletIdField()
+        {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Wallet id (use as save key)", _windowStyles.LabelTextStyle());
             _walletId = EditorGUILayout.TextField("", _walletId);
             EditorGUILayout.EndHorizontal();
-            
+
             if (_walletId.Trim() != "" && _walletFactory.CanCreateWalletPrefabWith(_walletId) == false)
             {
-                EditorGUILayout.HelpBox($"This id ('{_walletId}') already taken\nPath: {_walletFactory.PathToWalletPrefabWith(_walletId)}", MessageType.Warning);
+                EditorGUILayout.HelpBox(
+                    $"This id ('{_walletId}') already taken\nPath: {_walletFactory.PathToWalletPrefabWith(_walletId)}",
+                    MessageType.Warning);
                 EditorGUILayout.Separator();
             }
-            
+        }
+
+        private void WalletTypeField()
+        {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Wallet type", _windowStyles.LabelTextStyle());
             _walletType = (WalletType)EditorGUILayout.EnumPopup(_walletType);
             EditorGUILayout.EndHorizontal();
+        }
 
-            EditorGUILayout.Space(6);
-
+        private void CreateWalletPrefabButton()
+        {
             if (GUILayout.Button("Create wallet prefab", _windowStyles.DefaultButtonStyle()))
             {
                 if (_walletFactory.CanCreateWalletPrefabWith(_walletId))
@@ -54,8 +75,6 @@ namespace Agava.Wallet.Editor
                     GUIUtility.keyboardControl = 0;
                 }
             }
-
-            EditorGUILayout.EndVertical();
         }
     }
 }
