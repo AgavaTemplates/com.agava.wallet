@@ -7,18 +7,19 @@ namespace Agava.Wallet.Samples
 {
     public class WalletBenchmark : MonoBehaviour
     {
-        [SerializeField] private IntWalletPresenter _wallet;
-        [SerializeField] private int _operations = 999999;
+        [SerializeField] private IntWalletPresenter _intWallet;
+        [SerializeField] private BigIntegerWalletPresenter _bigIntegerWallet;
 
-        [ContextMenu("StartTest")]
-        private void StartTest()
+        [ContextMenu("StartTestForIntWallet")]
+        private void StartTestForIntWallet()
         {
+            int operations = Random.Range(99990, 100000);
             var addWalletStopwatch = new Stopwatch();
             
             addWalletStopwatch.Start();
 
-            for (int i = 0; i < _operations; i++)
-                _wallet.Model.Add(1);
+            for (int i = 0; i < operations; i++)
+                _intWallet.Model.Add(1);
             
             addWalletStopwatch.Stop();
             
@@ -26,14 +27,41 @@ namespace Agava.Wallet.Samples
             
             spendWalletStopwatch.Start();
 
-            for (int i = 0; i < _operations; i++)
-                if (_wallet.Model.CanSpend(1))
-                    _wallet.Model.Spend(1);
+            for (int i = 0; i < operations; i++)
+                if (_intWallet.Model.CanSpend(1))
+                    _intWallet.Model.Spend(1);
             
             spendWalletStopwatch.Stop();
             
-            Debug.Log($"Add operations ({_operations}): {addWalletStopwatch.Elapsed.Milliseconds}ms\n" +
-                      $"Spend operations ({_operations}): {spendWalletStopwatch.Elapsed.Milliseconds}ms");
+            Debug.Log($"Add operations ({operations}): {addWalletStopwatch.Elapsed.Milliseconds}ms\n" +
+                      $"Spend operations ({operations}): {spendWalletStopwatch.Elapsed.Milliseconds}ms");
+        }
+        
+        [ContextMenu("StartTestForBigIntegerWallet")]
+        private void StartTestForBigIntegerWallet()
+        {
+            int operations = Random.Range(99990, 100000);
+            var addWalletStopwatch = new Stopwatch();
+            
+            addWalletStopwatch.Start();
+
+            for (int i = 0; i < operations; i++)
+                _bigIntegerWallet.Model.Add(1);
+            
+            addWalletStopwatch.Stop();
+            
+            var spendWalletStopwatch = new Stopwatch();
+            
+            spendWalletStopwatch.Start();
+
+            for (int i = 0; i < operations; i++)
+                if (_bigIntegerWallet.Model.CanSpend(1))
+                    _bigIntegerWallet.Model.Spend(1);
+            
+            spendWalletStopwatch.Stop();
+            
+            Debug.Log($"Add operations ({operations}): {addWalletStopwatch.Elapsed.Milliseconds}ms\n" +
+                      $"Spend operations ({operations}): {spendWalletStopwatch.Elapsed.Milliseconds}ms");
         }
     }
 }
