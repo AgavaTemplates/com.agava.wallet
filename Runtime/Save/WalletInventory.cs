@@ -7,6 +7,7 @@ namespace Agava.Wallet.Save
     {
         private readonly string _id;
         private readonly IJsonSaveLoad _saveLoad;
+        private TWallet _wallet;
 
         internal WalletInventory(string id) : this (id, new PlayerPrefsJsonSaveLoad()) { }
 
@@ -20,15 +21,18 @@ namespace Agava.Wallet.Save
 
         internal TWallet Load()
         {
-            var wallet = new TWallet();
+            if (_wallet != null)
+                return _wallet;
+
+            _wallet = new TWallet();
 
             if (_saveLoad.HasSave(_id))
             {
                 var jsonString = _saveLoad.Load(_id);
-                wallet = JsonConvert.DeserializeObject<TWallet>(jsonString);
+                _wallet = JsonConvert.DeserializeObject<TWallet>(jsonString);
             }
 
-            return wallet;
+            return _wallet;
         }
 
         internal void Save(TWallet wallet)
