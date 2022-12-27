@@ -1,4 +1,4 @@
-# com.agava.wallet
+# Wallet
 
 ## Installation
 
