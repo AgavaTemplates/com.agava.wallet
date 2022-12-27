@@ -1,9 +1,11 @@
-﻿using Agava.Wallet.Utils;
+﻿using Agava.Wallet.Model;
 using System.Numerics;
+using Agava.Wallet.Attributes;
 using UnityEngine;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Presenter
 {
+    [AddComponentMenu("")]
     public sealed class BigIntegerWalletPresenter : WalletPresenter<BigIntegerWallet, BigInteger>
     {
         [SerializeField, BigIntegerString] private string _startValue = "0";

@@ -1,13 +1,11 @@
-﻿using System;
+using Agava.Wallet.Attributes;
+using System;
 using System.Numerics;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-namespace Agava.Wallet.Utils
+namespace Agava.Wallet.Editor.AttributesDrawers
 {
-    public class BigIntegerStringAttribute : PropertyAttribute { }
-    
-#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(BigIntegerStringAttribute))]
     public class BigIntegerStringAttributeDrawer : PropertyDrawer
     {
@@ -34,5 +32,4 @@ namespace Agava.Wallet.Utils
             GUI.color = startColor;
         }
     }
-#endif
 }

@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
+using Agava.Wallet.Attributes;
+using Agava.Wallet.Model;
+using Agava.Wallet.Save;
+using Agava.Wallet.View;
 using UnityEngine;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Presenter
 {
-    public abstract class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
+    public abstract partial class WalletPresenter<TWallet, TWalletType> : MonoBehaviour where TWallet : IWallet<TWalletType>, new()
     {
-        [SerializeField] private List<MonoBehaviour> _walletViews;
-        [SerializeField] private string _id;
+        [SerializeField, ReadOnly] private string _id;
+        [SerializeField] private List<MonoBehaviour> _walletViews = new();
 
         public IWallet<TWalletType> Model { get; private set; }
         protected abstract TWalletType StartValue { get; }
@@ -15,7 +19,7 @@ namespace Agava.Wallet
         {
             foreach (var view in _walletViews)
             {
-                if (view && view is IWalletView<TWalletType> == false)
+                if (view != null && view is IWalletView<TWalletType> == false)
                 {
                     Debug.LogError(nameof(view) + " needs to implement " + typeof(IWalletView<TWalletType>));
                     _walletViews.Remove(view);
@@ -27,10 +31,10 @@ namespace Agava.Wallet
 
         private void Awake()
         {
-            var walletSave = new WalletSave<TWallet, TWalletType>(_id);
-            Model = new ViewedWallet<TWalletType>(new SavedWallet<TWallet, TWalletType>(walletSave), CastWalletView());
+            var walletInventory = new WalletInventory<TWallet, TWalletType>(_id);
+            Model = new ViewedWallet<TWalletType>(new SavedWallet<TWallet, TWalletType>(walletInventory), CastWalletView());
             
-            if (walletSave.HasSave == false)
+            if (walletInventory.HasSave == false)
                 Model.Add(StartValue);
         }
 

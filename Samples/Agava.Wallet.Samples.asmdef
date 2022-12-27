@@ -1,0 +1,16 @@
+{
+    "name": "Agava.Wallet.Samples",
+    "rootNamespace": "Agava.Wallet.Samples",
+    "references": [
+        "GUID:0a997313ea838c4418e6013767cd9380"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

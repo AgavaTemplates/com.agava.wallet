@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Agava.Wallet
+namespace Agava.Wallet.Model
 {
     [Serializable]
     public sealed class IntWallet : IWallet<int>
@@ -19,7 +19,8 @@ namespace Agava.Wallet
             Value += amount;
         }
 
-        public bool CanSpend(int amount) => amount >= 0 && Value - amount >= 0;
+        public bool CanSpend(int amount) 
+            => amount >= 0 && Value - amount >= 0;
 
         public void Spend(int amount)
         {

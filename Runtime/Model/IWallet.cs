@@ -1,4 +1,4 @@
-﻿namespace Agava.Wallet
+﻿namespace Agava.Wallet.Model
 {
     public interface IWallet<T>
     {
