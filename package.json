@@ -1,6 +1,6 @@
 {
   "name": "com.agava.wallet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Wallet",
   "unity": "2021.3",
   "description": "Wallet template."
