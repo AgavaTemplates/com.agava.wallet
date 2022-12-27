@@ -3,6 +3,7 @@
 ## How to create a wallet?
 
 In Unity, open "Window" -> "Wallet Factory"
+
 ![Imgur](https://i.imgur.com/d54oXOf.png)
 
 1. Enter wallet id
